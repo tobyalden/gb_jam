@@ -8,6 +8,7 @@ class Level extends TmxEntity
 {
 
   public static inline var PLAYER = 17;
+  public static inline var PIT = 18;
 
   public var entities:Array<Entity>;
 
@@ -20,9 +21,15 @@ class Level extends TmxEntity
       map = TmxMap.loadFromFile(filename);
       for(entity in map.getObjectGroup("entities").objects)
       {
+        /*trace(entity.gid);*/
         if(entity.gid == PLAYER)
         {
           entities.push(new Player(entity.x, entity.y));
+          entities.push(new Shadow(entity.x, entity.y));
+        }
+        if(entity.gid == PIT)
+        {
+          entities.push(new Pit(entity.x, entity.y));
         }
       }
   }

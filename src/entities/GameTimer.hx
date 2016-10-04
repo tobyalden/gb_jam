@@ -33,7 +33,7 @@ class GameTimer
 
   public function wasActive()
   {
-    return prevCount > count;
+    return prevCount == 1;
   }
 
   public static function updateAll()

@@ -1,7 +1,7 @@
 X add roll
 X add scrolling
+X add pits
 - add enemies
-- add pits
 - add damage / death
 - add textures
 - add some form of attack/defense
