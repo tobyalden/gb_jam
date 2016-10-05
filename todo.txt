@@ -1,7 +1,7 @@
 X add roll
 X add scrolling
 X add pits
-- add enemies
+// add enemies
 - add damage / death
 - add textures
 - add some form of attack/defense
@@ -9,3 +9,7 @@ X add pits
 - add music
 - add sfx
 - add beginning / ending
+
+- : not done
+/ : in progress
+X: finished

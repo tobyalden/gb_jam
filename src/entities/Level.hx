@@ -10,6 +10,7 @@ class Level extends TmxEntity
   public static inline var PLAYER = 17;
   public static inline var PIT = 18;
   public static inline var NYMPH = 19;
+  public static inline var STALKER = 20;
 
   public var entities:Array<Entity>;
 
@@ -35,6 +36,10 @@ class Level extends TmxEntity
         if(entity.gid == NYMPH)
         {
           entities.push(new Nymph(entity.x, entity.y));
+        }
+        if(entity.gid == STALKER)
+        {
+          entities.push(new Stalker(entity.x, entity.y));
         }
       }
   }

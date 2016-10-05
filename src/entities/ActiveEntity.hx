@@ -49,31 +49,45 @@ class ActiveEntity extends Entity
         }
     }
 
-    private function isOnGround()
-    {
-        return collide("walls", x, y + 1) != null;
-    }
-
-    private function isOnCeiling()
-    {
-        return collide("walls", x, y - 1) != null;
-    }
-
-    private function isOnWall()
+    private function isAgainstWall()
     {
         return (
           collide("walls", x - 1, y) != null ||
-          collide("walls", x + 1, y) != null
+          collide("walls", x + 1, y) != null ||
+          collide("walls", x, y - 1) != null ||
+          collide("walls", x, y + 1) != null
         );
     }
 
-    private function isOnRightWall()
+    private function isAgainstBottomWall()
     {
-        return collide("walls", x + 1, y) != null;
+        return (
+          collide("walls", x, y + 1) != null ||
+          collide("pit", x, y + 1) != null
+        );
     }
 
-    private function isOnLeftWall()
+    private function isAgainstTopWall()
     {
-        return collide("walls", x - 1, y) != null;
+        return (
+          collide("walls", x, y - 1) != null ||
+          collide("pit", x, y - 1) != null
+        );
+    }
+
+    private function isAgainstRightWall()
+    {
+        return (
+          collide("walls", x + 1, y) != null ||
+          collide("pit", x + 1, y) != null
+        );
+    }
+
+    private function isAgainstLeftWall()
+    {
+        return (
+          collide("walls", x - 1, y) != null ||
+          collide("pit", x - 1, y) != null
+        );
     }
 }
