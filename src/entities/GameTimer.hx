@@ -8,12 +8,14 @@ class GameTimer
   public var count:Int;
   public var prevCount:Int;
   public var duration:Int;
+  public var autoReset:Bool;
 
   public function new(duration:Int)
   {
     this.duration = duration;
     count = 0;
     prevCount = 0;
+    autoReset = false;
     allTimers.push(this);
   }
 
@@ -44,6 +46,9 @@ class GameTimer
       if(timer.count > 0)
       {
         timer.count -= 1;
+      }
+      if(timer.autoReset && timer.count == 0) {
+        timer.reset();
       }
     }
   }

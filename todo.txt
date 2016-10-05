@@ -1,14 +1,15 @@
 X add roll
 X add scrolling
 X add pits
-// add enemies
-- add damage / death
-- add textures
-- add some form of attack/defense
-- add npcs
-- add music
-- add sfx
-- add beginning / ending
+/// add enemies
+- give enemies active radius (WED)
+- add damage / death (WED)
+- add textures (THURS)
+- add some form of attack/defense FRI)
+- add npcs (SAT)
+- add music (SUN)
+- add sfx (SUN)
+- add beginning / ending (SUN)
 
 - : not done
 / : in progress

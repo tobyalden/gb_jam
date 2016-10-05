@@ -15,14 +15,9 @@ class Stalker extends ActiveEntity
   private var facing:String;
   private var player:Player;
 
-  private var prevX:Float;
-  private var prevY:Float;
-
 	public function new(x:Int, y:Int)
 	{
 		super(x, y);
-    prevX = x;
-    prevY = y;
     sprite = new Spritemap("graphics/stalker.png", 16, 16);
     sprite.add("down", [0, 1], 6);
     sprite.add("right", [2, 3], 6);
@@ -32,7 +27,7 @@ class Stalker extends ActiveEntity
     facing = "down";
     setHitbox(11, 15, -3, -1);
 
-    type = "stalker";
+    type = "enemy";
     layer = -9999;
 
 		finishInitializing();
@@ -88,10 +83,6 @@ class Stalker extends ActiveEntity
     }
 
     moveBy(velocity.x, velocity.y, ["walls", "pit"]);
-
-    if(x == prevX && y == prevY) {
-      sprite.stop();
-    }
 
     if(Input.check(Key.ESCAPE)) {
       System.exit(0);
