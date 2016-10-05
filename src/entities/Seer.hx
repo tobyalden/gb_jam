@@ -58,13 +58,9 @@ class Seer extends ActiveEntity
 
     if(centerY < player.centerY) {
       velocity.y += SPEED;
-      facing = "down";
-      sprite.play(facing);
     }
     else if(centerY > player.centerY) {
       velocity.y -= SPEED;
-      facing = "up";
-      sprite.play(facing);
     }
     else {
       velocity.y = 0;
@@ -72,13 +68,9 @@ class Seer extends ActiveEntity
 
     if(centerX > player.centerX) {
       velocity.x -= SPEED;
-      facing = "left";
-      sprite.play(facing);
     }
     else if(centerX < player.centerX) {
       velocity.x += SPEED;
-      facing = "right";
-      sprite.play(facing);
     }
     else {
       velocity.x = 0;
@@ -100,9 +92,6 @@ class Seer extends ActiveEntity
 
     drift = Math.sin(driftTimer.count / DRIFT_RATE);
 
-    if(drift / prevDrift < 0) {
-      trace("fire!");
-    }
 
     /*trace("prevDrift is " + prevDrift + ". drift is " + drift);*/
 
@@ -115,12 +104,45 @@ class Seer extends ActiveEntity
       System.exit(0);
     }
 
+    animate();
+    if(drift / prevDrift < 0) {
+      spit();
+    }
+
     prevDrift = drift;
     if(prevDrift == 0) {
       prevDrift = 0.000001;
     }
 
+
     super.update();
+  }
+
+  private function animate()
+  {
+    if(Math.abs(centerX - player.centerX) > Math.abs(centerY - player.centerY))
+    {
+      if(centerX > player.centerX) {
+        facing = "left";
+      }
+      else {
+        facing = "right";
+      }
+    }
+    else {
+      if(centerY > player.centerY) {
+        facing = "up";
+      }
+      else {
+        facing = "down";
+      }
+    }
+    sprite.play(facing);
+  }
+
+  private function spit()
+  {
+    HXP.scene.add(new Spit(Math.round(centerX), Math.round(centerY), facing));
   }
 
   override public function moveCollideX(e:Entity)
