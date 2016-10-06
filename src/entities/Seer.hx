@@ -52,8 +52,18 @@ class Seer extends ActiveEntity
 
   public override function update()
   {
+
     if(player == null) {
         player = cast(HXP.scene.getInstance("player"), Player);
+    }
+    
+    if(!getScreenCoordinates().equals(player.getScreenCoordinates()))
+    {
+      x = startPosition.x;
+      y = startPosition.y;
+      velocity.x = 0;
+      velocity.y = 0;
+      return;
     }
 
     if(centerY < player.centerY) {

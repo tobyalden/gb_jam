@@ -10,7 +10,7 @@ import entities.*;
 class Spit extends ActiveEntity
 {
 
-  public static inline var SPEED = 2;
+  public static inline var SPEED = 2.5;
   public static inline var DRIFT_RATE = 60;
   public static inline var MAX_VELOCITY = 6;
 

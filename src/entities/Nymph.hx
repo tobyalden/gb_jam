@@ -11,9 +11,11 @@ class Nymph extends ActiveEntity
 {
 
   public static inline var SPEED = 1;
+  public static inline var OFFSCREEN_DISTANCE = 25;
 
   private var facing:String;
   private var isFalling:Bool;
+  private var player:Player;
 
 	public function new(x:Int, y:Int)
 	{
@@ -38,6 +40,19 @@ class Nymph extends ActiveEntity
 
   public override function update()
   {
+    if(player == null) {
+        player = cast(HXP.scene.getInstance("player"), Player);
+    }
+
+    if(!getScreenCoordinates().equals(player.getScreenCoordinates()))
+    {
+      if (
+        distanceFrom(player) > OFFSCREEN_DISTANCE
+      ) {
+        return;
+      }
+    }
+
     if(Input.check(Key.LEFT)) {
       velocity.x = -SPEED;
       facing = "left";

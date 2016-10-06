@@ -9,18 +9,21 @@ import com.haxepunk.graphics.Spritemap;
 class ActiveEntity extends Entity
 {
     private var sprite:Spritemap;
+    private var startPosition:Point;
     private var velocity:Point;
+
 
     public function new(x:Int, y:Int)
     {
         super(x, y);
+        startPosition = new Point(x, y);
         velocity = new Point(0, 0);
     }
 
     public function getScreenCoordinates() {
       return new Point(
-        Math.floor(x / HXP.screen.width),
-        Math.floor(y / HXP.screen.height)
+        Math.floor(centerX / HXP.screen.width),
+        Math.floor(centerY / HXP.screen.height)
       );
     }
 

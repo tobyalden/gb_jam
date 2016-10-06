@@ -2,7 +2,7 @@ X add roll
 X add scrolling
 X add pits
 /// add enemies
-- give enemies active radius (WED)
+X give enemies active radius (WED)
 - add damage / death (WED)
 - add textures (THURS)
 - add some form of attack/defense FRI)
