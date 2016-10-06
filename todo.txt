@@ -5,7 +5,7 @@ X add pits
 X give enemies active radius (WED)
 X add damage / death (WED)
 - add textures (THURS)
-- add some form of attack/defense FRI)
+- add some form of attack/defense (FRI)
 - add npcs (SAT)
 - add levels(SAT / SUN)
 - add music (SUN)

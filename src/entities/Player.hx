@@ -33,10 +33,13 @@ class Player extends ActiveEntity
   private var invincibleTimer:GameTimer;
   private var deathTimer:GameTimer;
 
+  private var prevCamera:Point;
+
 	public function new(x:Int, y:Int)
 	{
 		super(x, y);
     lastEntrance = new Point(x, y);
+    prevCamera = new Point(0, 0);
     sprite = new Spritemap("graphics/player.png", 16, 25);
     sprite.add("down", [0, 1], 6);
     sprite.add("right", [2, 3], 6);
@@ -58,6 +61,7 @@ class Player extends ActiveEntity
     deathTimer = new GameTimer(DEATH_TIME);
     health = STARTING_HEALTH;
     name = "player";
+    type = "player";
     layer = -9999;
 
 		finishInitializing();
@@ -155,8 +159,28 @@ class Player extends ActiveEntity
 
     animate();
 
+
     HXP.scene.camera.x = Math.floor(centerX / HXP.screen.width) * HXP.screen.width;
     HXP.scene.camera.y = Math.floor(centerY / HXP.screen.height) * HXP.screen.height;
+
+    if(!prevCamera.equals(new Point(HXP.scene.camera.x, HXP.scene.camera.y))) {
+      lastEntrance.x = x;
+      lastEntrance.y = y;
+      if(HXP.scene.camera.x > prevCamera.x) {
+        lastEntrance.x += 8;
+      }
+      else if(HXP.scene.camera.x < prevCamera.x) {
+        lastEntrance.x -= 8;
+      }
+      else if(HXP.scene.camera.y > prevCamera.y) {
+        lastEntrance.y += 8;
+      }
+      else {
+        lastEntrance.y -= 8;
+      }
+    }
+
+    prevCamera = new Point(HXP.scene.camera.x , HXP.scene.camera.y);
 
     super.update();
   }
@@ -226,6 +250,7 @@ class Player extends ActiveEntity
     x = lastEntrance.x;
     y = lastEntrance.y;
     sprite.play(facing);
+    invincibleTimer.reset();
   }
 
   public function isShadowVisible()

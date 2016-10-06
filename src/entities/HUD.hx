@@ -14,7 +14,7 @@ class HUD extends Entity
     public function new()
     {
       super(0, 0);
-      sprite = new Spritemap("graphics/heart.png", 90, 9);
+      sprite = new Spritemap("graphics/hearts.png", 90, 9);
       sprite.add("0", [0]);
       sprite.add("1", [1]);
       sprite.add("2", [2]);
