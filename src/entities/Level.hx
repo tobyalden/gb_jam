@@ -29,6 +29,7 @@ class Level extends TmxEntity
         {
           entities.push(new Player(entity.x, entity.y));
           entities.push(new Shadow(entity.x, entity.y));
+          entities.push(new HUD());
         }
         if(entity.gid == PIT)
         {

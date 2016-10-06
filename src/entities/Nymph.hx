@@ -32,7 +32,7 @@ class Nymph extends ActiveEntity
 
     isFalling = false;
 
-    type = "nymph";
+    type = "enemy";
     layer = -9999;
 
 		finishInitializing();

@@ -3,10 +3,11 @@ X add scrolling
 X add pits
 /// add enemies
 X give enemies active radius (WED)
-- add damage / death (WED)
+X add damage / death (WED)
 - add textures (THURS)
 - add some form of attack/defense FRI)
 - add npcs (SAT)
+- add levels(SAT / SUN)
 - add music (SUN)
 - add sfx (SUN)
 - add beginning / ending (SUN)

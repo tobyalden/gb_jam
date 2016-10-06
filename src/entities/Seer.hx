@@ -56,7 +56,11 @@ class Seer extends ActiveEntity
     if(player == null) {
         player = cast(HXP.scene.getInstance("player"), Player);
     }
-    
+
+    if(player.isDead()) {
+      return;
+    }
+
     if(!getScreenCoordinates().equals(player.getScreenCoordinates()))
     {
       x = startPosition.x;

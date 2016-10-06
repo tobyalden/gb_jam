@@ -40,6 +40,11 @@ class Stalker extends ActiveEntity
         player = cast(HXP.scene.getInstance("player"), Player);
     }
 
+    if(player.isDead()) {
+      sprite.stop();
+      return;
+    }
+
     if(centerX > player.centerX && !isAgainstLeftWall()) {
       velocity.x = -SPEED;
       velocity.y = 0;

@@ -11,16 +11,27 @@ class Player extends ActiveEntity
 {
 
   public static inline var SPEED = 1;
+  public static inline var KNOCKBACK_SPEED = 2;
   public static inline var ROLL_MULTIPLIER = 2;
   public static inline var ROLL_DURATION = 20;
   public static inline var ROLL_COOLDOWN = 12;
   public static inline var FALL_TIME = 120;
+
+  public static inline var STUN_TIME = 17;
+  public static inline var INVINCIBLE_TIME = 60;
+  public static inline var STARTING_HEALTH = 3;
+  public static inline var DEATH_TIME = 25000;
 
   private var rollTimer:GameTimer;
   private var rollCooldownTimer:GameTimer;
   private var fallTimer:GameTimer;
   private var facing:String;
   private var lastEntrance:Point;
+
+  public var health:Int;
+  private var stunTimer:GameTimer;
+  private var invincibleTimer:GameTimer;
+  private var deathTimer:GameTimer;
 
 	public function new(x:Int, y:Int)
 	{
@@ -34,6 +45,7 @@ class Player extends ActiveEntity
     sprite.add("roll_vertical", [8, 9, 10, 11], 6);
     sprite.add("roll_horizontal", [12, 13, 14, 15], 6);
     sprite.add("fall", [16, 17, 18, 19], 3, false);
+    sprite.add("death", [20], false);
     sprite.play("down");
     facing = "down";
     setHitbox(11, 15, -3, -11);
@@ -41,24 +53,32 @@ class Player extends ActiveEntity
     rollTimer = new GameTimer(ROLL_DURATION);
     rollCooldownTimer = new GameTimer(ROLL_COOLDOWN);
     fallTimer = new GameTimer(FALL_TIME);
-
+    stunTimer = new GameTimer(STUN_TIME);
+    invincibleTimer = new GameTimer(INVINCIBLE_TIME);
+    deathTimer = new GameTimer(DEATH_TIME);
+    health = STARTING_HEALTH;
     name = "player";
     layer = -9999;
 
 		finishInitializing();
 	}
 
+  public function isDead()
+  {
+    return deathTimer.isActive();
+  }
+
   public override function update()
   {
-    if(fallTimer.wasActive()) {
+
+    if(fallTimer.wasActive() && !isDead()) {
       restartAtRoomEntrance();
     }
 
-    var inControl:Bool = !rollTimer.isActive() && !fallTimer.isActive();
+    var inControl:Bool = !rollTimer.isActive() && !fallTimer.isActive() && !stunTimer.isActive() && !deathTimer.isActive();
 
     if(inControl)
     {
-
       if(rollTimer.wasActive()) {
           rollCooldownTimer.reset();
       }
@@ -96,7 +116,9 @@ class Player extends ActiveEntity
           velocity.y *= ROLL_MULTIPLIER * singleDirectionMultipler;
         }
       }
+    }
 
+    if(!rollTimer.isActive() && !fallTimer.isActive() && !stunTimer.isActive()) {
       var pit:Entity = collide("pit", x, y);
       if(pit != null) {
         velocity.x = 0;
@@ -107,7 +129,25 @@ class Player extends ActiveEntity
       }
     }
 
+
     moveBy(velocity.x, velocity.y, "walls");
+
+    if(!deathTimer.isActive() && !fallTimer.isActive()) {
+      if(invincibleTimer.isActive()) {
+        graphic.visible = invincibleTimer.count % 2 == 0;
+      }
+      else {
+        graphic.visible = true;
+        var enemy:Entity = collide("enemy", x, y);
+        if(enemy != null) {
+          takeDamage(enemy);
+        }
+      }
+    }
+    else {
+      velocity.x /= 1.1;
+      velocity.y /= 1.1;
+    }
 
     if(Input.check(Key.ESCAPE)) {
       System.exit(0);
@@ -121,10 +161,44 @@ class Player extends ActiveEntity
     super.update();
   }
 
+  private function takeDamage(enemy:Entity)
+  {
+    health -= 1;
+    stunTimer.reset();
+    invincibleTimer.reset();
+    if(health == 0) {
+      deathTimer.reset();
+    }
+    if(Math.abs(centerX - enemy.centerX) > Math.abs(centerY - enemy.centerY))
+    {
+      if(centerX > enemy.centerX) {
+        facing = "left";
+        velocity.x = KNOCKBACK_SPEED;
+      }
+      else {
+        facing = "right";
+        velocity.x = -KNOCKBACK_SPEED;
+      }
+    }
+    else {
+      if(centerY > enemy.centerY) {
+        facing = "up";
+        velocity.y = KNOCKBACK_SPEED;
+      }
+      else {
+        facing = "down";
+        velocity.y = -KNOCKBACK_SPEED;
+      }
+    }
+  }
+
   private function animate()
   {
     if(fallTimer.isActive()) {
       sprite.play("fall");
+    }
+    else if(deathTimer.isActive()) {
+      sprite.play("death");
     }
     else if(rollTimer.isActive()) {
       if(velocity.y != 0) {
