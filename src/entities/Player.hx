@@ -251,6 +251,7 @@ class Player extends ActiveEntity
     y = lastEntrance.y;
     sprite.play(facing);
     invincibleTimer.reset();
+    health -= 1;
   }
 
   public function isShadowVisible()
