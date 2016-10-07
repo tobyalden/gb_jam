@@ -75,7 +75,7 @@ class Player extends ActiveEntity
   public override function update()
   {
 
-    if(fallTimer.wasActive() && !isDead()) {
+    if(fallTimer.wasActive()) {
       restartAtRoomEntrance();
     }
 
@@ -164,6 +164,7 @@ class Player extends ActiveEntity
     HXP.scene.camera.y = Math.floor(centerY / HXP.screen.height) * HXP.screen.height;
 
     if(!prevCamera.equals(new Point(HXP.scene.camera.x, HXP.scene.camera.y))) {
+      HUD.hud.clearMessages();
       lastEntrance.x = x;
       lastEntrance.y = y;
       if(HXP.scene.camera.x > prevCamera.x) {
@@ -247,11 +248,17 @@ class Player extends ActiveEntity
 
   private function restartAtRoomEntrance()
   {
-    x = lastEntrance.x;
-    y = lastEntrance.y;
-    sprite.play(facing);
-    invincibleTimer.reset();
     health -= 1;
+    if(health == 0) {
+      deathTimer.reset();
+    }
+    if(!deathTimer.isActive()) {
+      x = lastEntrance.x;
+      y = lastEntrance.y;
+      sprite.play(facing);
+      stunTimer.reset();
+      invincibleTimer.reset();
+    }
   }
 
   public function isShadowVisible()

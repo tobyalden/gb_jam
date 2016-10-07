@@ -8,16 +8,20 @@ import com.haxepunk.graphics.Spritemap;
 
 class ActiveEntity extends Entity
 {
+    public static inline var TIME_BETWEEN_EMOTES = 350;
+
     private var sprite:Spritemap;
     private var startPosition:Point;
     private var velocity:Point;
-
+    private var playerRef:Player;
+    private var emoteTimer:GameTimer;
 
     public function new(x:Int, y:Int)
     {
         super(x, y);
         startPosition = new Point(x, y);
         velocity = new Point(0, 0);
+        emoteTimer = new GameTimer(TIME_BETWEEN_EMOTES);
     }
 
     public function getScreenCoordinates() {
@@ -36,7 +40,20 @@ class ActiveEntity extends Entity
     public override function update()
     {
         super.update();
+        if(playerRef == null) {
+            playerRef = cast(HXP.scene.getInstance("player"), Player);
+        }
+        if(!emoteTimer.isActive() && getScreenCoordinates().equals(playerRef.getScreenCoordinates()))
+        {
+          emote();
+          emoteTimer.reset();
+        }
         unstuck();
+    }
+
+    public function emote()
+    {
+      // override this to make an active entity emit a console message
     }
 
     public function getPositionOnScreen()

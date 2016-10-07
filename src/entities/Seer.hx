@@ -14,6 +14,14 @@ class Seer extends ActiveEntity
   public static inline var DRIFT_RATE = 80;
   public static inline var MAX_VELOCITY = 1;
 
+  private var sayings = [
+    "SEER GIVES YOU THE EVIL EYE",
+    "SEER LOOKS YOU UP AND DOWN",
+    "SEER EYEBALLS YOU",
+    "SEER GIVES YOU THE ONCE-OVER",
+    "SEER GLOWERS AT YOU"
+  ];
+
   private var facing:String;
   private var player:Player;
 
@@ -154,9 +162,20 @@ class Seer extends ActiveEntity
     sprite.play(facing);
   }
 
+  override public function emote()
+  {
+      var message:String = sayings.shift();
+      HUD.hud.echo(message);
+      sayings.push(message);
+  }
+
   private function spit()
   {
     HXP.scene.add(new Spit(Math.round(centerX), Math.round(centerY), facing));
+    if(Math.random() > 0.5) {
+      HUD.hud.echo("SEER HOCKS A LOOGIE! RUDE!!");
+    }
+    emoteTimer.count += Math.round(emoteTimer.duration/3.5);
   }
 
   override public function moveCollideX(e:Entity)

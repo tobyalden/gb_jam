@@ -96,6 +96,19 @@ class Stalker extends ActiveEntity
     super.update();
   }
 
+  override public function emote()
+  {
+    if(velocity.x == 0 && velocity.y == 0) {
+      HUD.hud.echo("STALKER STARES AT YOU");
+    }
+    else if(velocity.y == 0) {
+      HUD.hud.echo("STALKER TRIES TO GET IN YOUR WAY");
+    }
+    else {
+      HUD.hud.echo("STALKER ADVANCES WORDLESSLY");
+    }
+  }
+
   override public function moveCollideX(e:Entity)
   {
     sprite.stop();
