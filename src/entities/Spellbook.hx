@@ -1,12 +1,18 @@
 package entities;
 
 import com.haxepunk.*;
+import com.haxepunk.utils.*;
 import com.haxepunk.graphics.*;
 
 class Spellbook extends Entity
 {
+
+    private var deleteSelf:Bool;
+
     public function new(x:Int, y:Int)
     {
+      Data.load('familySave');
+      deleteSelf = Data.read('hasSpellbook', false);
       super(x, y);
       graphic = new Image("graphics/spellbook.png");
       setHitbox(16, 16);
@@ -14,6 +20,9 @@ class Spellbook extends Entity
 
     override public function update()
     {
+      if(deleteSelf) {
+        HXP.scene.remove(this);
+      }
       var _player:Entity = collide("player", x, y);
       if(_player != null)
       {

@@ -72,6 +72,6 @@ class Door extends ActiveEntity
 
     override public function emote()
     {
-      HUD.hud.echo("THE DOOR LOOKS ON PASSIVELY");
+      HUD.hud.echo("DOOR LOOKS ON PASSIVELY");
     }
 }

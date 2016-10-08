@@ -32,7 +32,7 @@ class Player extends ActiveEntity
   private var rollCooldownTimer:GameTimer;
   private var fallTimer:GameTimer;
   private var facing:String;
-  private var lastEntrance:Point;
+  public var lastEntrance:Point;
 
   private var stunTimer:GameTimer;
   private var deathTimer:GameTimer;
@@ -49,7 +49,11 @@ class Player extends ActiveEntity
 
 	public function new(x:Int, y:Int)
 	{
-		super(x, y);
+    Data.load('familySave');
+    var saveX:Int = Data.read('saveX', x);
+    var saveY:Int = Data.read('saveY', y);
+    var saveSpellbook:Bool = Data.read('hasSpellbook', false);
+		super(saveX, saveY);
     lastEntrance = new Point(x, y);
     prevCamera = new Point(0, 0);
     sprite = new Spritemap("graphics/player.png", 16, 25);
@@ -79,7 +83,7 @@ class Player extends ActiveEntity
     castDurationTimer = new GameTimer(CAST_DURATION);
     gameOverScreenTimer = new GameTimer(GAME_OVER_SCREEN_DELAY);
     stunTimer.reset();
-    hasSpellbook = false;
+    hasSpellbook = saveSpellbook;
     health = STARTING_HEALTH;
     name = "player";
     type = "player";
