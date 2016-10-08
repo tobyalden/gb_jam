@@ -7,7 +7,7 @@ import com.haxepunk.*;
 import com.haxepunk.graphics.*;
 import entities.*;
 
-class Spit extends ActiveEntity
+class Spell extends ActiveEntity
 {
 
   public static inline var SPEED = 2.5;
@@ -19,13 +19,13 @@ class Spit extends ActiveEntity
 	public function new(x:Int, y:Int, facing:String)
 	{
 		super(x - 3, y - 3);
-    sprite = new Spritemap("graphics/spit.png", 5, 5);
+    sprite = new Spritemap("graphics/spell.png", 5, 5);
     sprite.add("idle", [0]);
     sprite.play("idle");
     this.facing = facing;
     setHitbox(5, 5);
 
-    type = "enemy";
+    type = "spell";
     layer = -9998;
 
 		finishInitializing();

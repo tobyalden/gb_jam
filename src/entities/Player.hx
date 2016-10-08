@@ -15,6 +15,10 @@ class Player extends ActiveEntity
   public static inline var ROLL_MULTIPLIER = 2;
   public static inline var ROLL_DURATION = 20;
   public static inline var ROLL_COOLDOWN = 12;
+
+  public static inline var CAST_COOLDOWN= 15;
+  public static inline var CAST_DURATION= 20;
+
   public static inline var FALL_TIME = 120;
 
   public static inline var STUN_TIME = 17;
@@ -33,6 +37,9 @@ class Player extends ActiveEntity
   private var invincibleTimer:GameTimer;
   private var deathTimer:GameTimer;
 
+  private var castDurationTimer:GameTimer;
+  private var castCooldownTimer:GameTimer;
+
   private var prevCamera:Point;
 
 	public function new(x:Int, y:Int)
@@ -48,7 +55,11 @@ class Player extends ActiveEntity
     sprite.add("roll_vertical", [8, 9, 10, 11], 6);
     sprite.add("roll_horizontal", [12, 13, 14, 15], 6);
     sprite.add("fall", [16, 17, 18, 19], 3, false);
-    sprite.add("death", [20], false);
+    sprite.add("death", [20]);
+    sprite.add("cast_down", [21]);
+    sprite.add("cast_right", [22]);
+    sprite.add("cast_left", [23]);
+    sprite.add("cast_up", [24]);
     sprite.play("down");
     facing = "down";
     setHitbox(11, 15, -3, -11);
@@ -59,6 +70,8 @@ class Player extends ActiveEntity
     stunTimer = new GameTimer(STUN_TIME);
     invincibleTimer = new GameTimer(INVINCIBLE_TIME);
     deathTimer = new GameTimer(DEATH_TIME);
+    castCooldownTimer = new GameTimer(CAST_COOLDOWN);
+    castDurationTimer = new GameTimer(CAST_DURATION);
     health = STARTING_HEALTH;
     name = "player";
     type = "player";
@@ -79,7 +92,7 @@ class Player extends ActiveEntity
       restartAtRoomEntrance();
     }
 
-    var inControl:Bool = !rollTimer.isActive() && !fallTimer.isActive() && !stunTimer.isActive() && !deathTimer.isActive();
+    var inControl:Bool = !rollTimer.isActive() && !fallTimer.isActive() && !stunTimer.isActive() && !deathTimer.isActive() && !castDurationTimer.isActive();
 
     if(inControl)
     {
@@ -109,7 +122,7 @@ class Player extends ActiveEntity
         velocity.y = 0;
       }
 
-      if(Input.check(Key.X)) {
+      if(Input.check(Key.Z)) {
         if(!rollCooldownTimer.isActive()) {
           rollTimer.reset();
           var singleDirectionMultipler:Float = 1;
@@ -118,6 +131,12 @@ class Player extends ActiveEntity
           }
           velocity.x *= ROLL_MULTIPLIER * singleDirectionMultipler;
           velocity.y *= ROLL_MULTIPLIER * singleDirectionMultipler;
+        }
+      }
+
+      if(Input.check(Key.X)) {
+        if(!castCooldownTimer.isActive()) {
+          castSpell();
         }
       }
     }
@@ -165,6 +184,9 @@ class Player extends ActiveEntity
 
     if(!prevCamera.equals(new Point(HXP.scene.camera.x, HXP.scene.camera.y))) {
       HUD.hud.clearMessages();
+      if(collide("pit", x, y) != null) {
+        return;
+      }
       lastEntrance.x = x;
       lastEntrance.y = y;
       if(HXP.scene.camera.x > prevCamera.x) {
@@ -225,6 +247,9 @@ class Player extends ActiveEntity
     else if(deathTimer.isActive()) {
       sprite.play("death");
     }
+    else if(castDurationTimer.isActive()) {
+      sprite.play("cast_" + facing);
+    }
     else if(rollTimer.isActive()) {
       if(velocity.y != 0) {
         sprite.play("roll_vertical");
@@ -259,6 +284,15 @@ class Player extends ActiveEntity
       stunTimer.reset();
       invincibleTimer.reset();
     }
+  }
+
+  private function castSpell()
+  {
+    velocity.x = 0;
+    velocity.y = 0;
+    HXP.scene.add(new Spell(Math.round(centerX), Math.round(centerY), facing));
+    castCooldownTimer.reset();
+    castDurationTimer.reset();
   }
 
   public function isShadowVisible()
