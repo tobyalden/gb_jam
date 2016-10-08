@@ -15,6 +15,7 @@ class Level extends TmxEntity
   public static inline var HEART = 22;
   public static inline var ANGEL = 23;
   public static inline var SPELLBOOK = 24;
+  public static inline var DOOR = 25;
 
   public var entities:Array<Entity>;
 
@@ -60,6 +61,10 @@ class Level extends TmxEntity
         if(entity.gid == SPELLBOOK)
         {
           entities.push(new Spellbook(entity.x, entity.y - 16));
+        }
+        if(entity.gid == DOOR)
+        {
+          entities.push(new Door(entity.x, entity.y - 16));
         }
       }
   }

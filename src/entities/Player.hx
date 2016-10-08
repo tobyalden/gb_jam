@@ -154,7 +154,7 @@ class Player extends ActiveEntity
     }
 
 
-    moveBy(velocity.x, velocity.y, "walls");
+    moveBy(velocity.x, velocity.y, ["walls", "door"]);
 
     if(!deathTimer.isActive() && !fallTimer.isActive()) {
       if(invincibleTimer.isActive()) {
