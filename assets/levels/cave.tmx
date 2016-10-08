@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="45" tilewidth="16" tileheight="16" nextobjectid="174">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="45" tilewidth="16" tileheight="16" nextobjectid="175">
  <tileset firstgid="1" name="tiles" tilewidth="16" tileheight="16" tilecount="16" columns="4">
   <image source="../graphics/tiles.png" width="64" height="64"/>
  </tileset>
@@ -155,6 +155,7 @@
   <object id="169" gid="18" x="256" y="240" width="16" height="16"/>
   <object id="170" gid="19" x="448" y="656" width="16" height="16"/>
   <object id="173" gid="23" x="416" y="640" width="16" height="16"/>
+  <object id="174" gid="24" x="336" y="656" width="16" height="16"/>
  </objectgroup>
  <layer name="guide" width="50" height="45" opacity="0.62">
   <data encoding="csv">

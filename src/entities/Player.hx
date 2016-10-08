@@ -40,6 +40,8 @@ class Player extends ActiveEntity
 
   private var prevCamera:Point;
 
+  public var hasSpellbook:Bool;
+
 	public function new(x:Int, y:Int)
 	{
 		super(x, y);
@@ -70,6 +72,7 @@ class Player extends ActiveEntity
     deathTimer = new GameTimer(DEATH_TIME);
     castCooldownTimer = new GameTimer(CAST_COOLDOWN);
     castDurationTimer = new GameTimer(CAST_DURATION);
+    hasSpellbook = false;
     health = STARTING_HEALTH;
     name = "player";
     type = "player";
@@ -133,7 +136,7 @@ class Player extends ActiveEntity
       }
 
       if(Input.check(Key.X)) {
-        if(!castCooldownTimer.isActive()) {
+        if(hasSpellbook && !castCooldownTimer.isActive()) {
           castSpell();
         }
       }

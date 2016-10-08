@@ -112,7 +112,9 @@ class Nymph extends ActiveEntity
 
   override private function takeDamage(spell:Entity)
   {
-    HUD.hud.echo("NYMPH'S BODY ABSORBS YOUR SPELL");
+    if(!hasFallen) {
+      HUD.hud.echo("NYMPH'S BODY ABSORBS YOUR SPELL");
+    }
   }
 
   private function animate()
