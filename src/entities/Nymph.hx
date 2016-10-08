@@ -33,6 +33,7 @@ class Nymph extends ActiveEntity
     isFalling = false;
 
     type = "enemy";
+    name = "nymph";
     layer = -9999;
 
 		finishInitializing();
@@ -76,15 +77,16 @@ class Nymph extends ActiveEntity
       velocity.y = 0;
     }
 
-    moveBy(velocity.x, velocity.y, "walls");
+    moveBy(velocity.x, velocity.y, ["walls", "enemy"]);
 
     var pit:Entity = collide("pit", x, y);
-    if(pit != null) {
+    if(isFalling || pit != null) {
       velocity.x = 0;
       velocity.y = 0;
       x = pit.x;
       y = pit.y;
       isFalling = true;
+      type = "falling_soul";
     }
 
     if(Input.check(Key.ESCAPE)) {
@@ -93,7 +95,14 @@ class Nymph extends ActiveEntity
 
     animate();
 
+    checkDamage();
+
     super.update();
+  }
+
+  override private function takeDamage(spell:Entity)
+  {
+    HUD.hud.echo("NYMPH'S BODY ABSORBS YOUR SPELL");
   }
 
   private function animate()

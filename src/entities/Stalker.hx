@@ -11,6 +11,7 @@ class Stalker extends ActiveEntity
 {
 
   public static inline var SPEED = 0.65;
+  public static inline var STARTING_HEALTH = 6;
 
   private var facing:String;
   private var player:Player;
@@ -26,6 +27,8 @@ class Stalker extends ActiveEntity
     sprite.play("down");
     facing = "down";
     setHitbox(11, 15, -3, -1);
+
+    health = STARTING_HEALTH;
 
     type = "enemy";
     layer = -9999;
@@ -87,11 +90,9 @@ class Stalker extends ActiveEntity
       sprite.stop();
     }
 
-    moveBy(velocity.x, velocity.y, ["walls", "pit"]);
+    checkDamage();
 
-    if(Input.check(Key.ESCAPE)) {
-      System.exit(0);
-    }
+    moveBy(velocity.x, velocity.y, ["walls", "pit"]);
 
     super.update();
   }

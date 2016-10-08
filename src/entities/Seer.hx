@@ -13,6 +13,7 @@ class Seer extends ActiveEntity
   public static inline var SPEED = 0.02;
   public static inline var DRIFT_RATE = 80;
   public static inline var MAX_VELOCITY = 1;
+  public static inline var STARTING_HEALTH = 4;
 
   private var sayings = [
     "SEER GIVES YOU THE EVIL EYE",
@@ -50,6 +51,8 @@ class Seer extends ActiveEntity
 
     type = "enemy";
     layer = -9999;
+
+    health = STARTING_HEALTH;
 
     driftTimer = new GameTimer(Math.round(2 * Math.PI) * DRIFT_RATE);
     driftTimer.autoReset = true;
@@ -136,6 +139,7 @@ class Seer extends ActiveEntity
       prevDrift = 0.000001;
     }
 
+    checkDamage();
 
     super.update();
   }

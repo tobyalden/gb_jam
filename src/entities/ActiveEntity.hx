@@ -9,6 +9,7 @@ import com.haxepunk.graphics.Spritemap;
 class ActiveEntity extends Entity
 {
     public static inline var TIME_BETWEEN_EMOTES = 350;
+    public static inline var DEFAULT_INVINCIBLE_TIME = 10;
 
     private var sprite:Spritemap;
     private var startPosition:Point;
@@ -16,12 +17,16 @@ class ActiveEntity extends Entity
     private var playerRef:Player;
     private var emoteTimer:GameTimer;
 
+    public var health:Int;
+    private var invincibleTimer:GameTimer;
+
     public function new(x:Int, y:Int)
     {
         super(x, y);
         startPosition = new Point(x, y);
         velocity = new Point(0, 0);
         emoteTimer = new GameTimer(TIME_BETWEEN_EMOTES);
+        invincibleTimer = new GameTimer(DEFAULT_INVINCIBLE_TIME);
     }
 
     public function getScreenCoordinates() {
@@ -49,6 +54,24 @@ class ActiveEntity extends Entity
           emoteTimer.reset();
         }
         unstuck();
+    }
+
+    private function checkDamage() {
+      var spell:Entity = collide("spell", x, y);
+      if(spell != null && !invincibleTimer.isActive()) {
+        cast(spell, Spell).explode();
+        takeDamage(spell);
+      }
+    }
+
+    private function takeDamage(spell:Entity)
+    {
+      health -= 1;
+      invincibleTimer.reset();
+      if(health <= 0) {
+        HXP.scene.add(new Explosion(Math.round(x), Math.round(y)));
+        HXP.scene.remove(this);
+      }
     }
 
     public function emote()

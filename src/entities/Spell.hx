@@ -51,6 +51,11 @@ class Spell extends ActiveEntity
     super.update();
   }
 
+  public function explode()
+  {
+    HXP.scene.remove(this);
+  }
+
   override public function moveCollideX(e:Entity)
   {
       HXP.scene.remove(this);

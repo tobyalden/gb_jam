@@ -32,9 +32,7 @@ class Player extends ActiveEntity
   private var facing:String;
   private var lastEntrance:Point;
 
-  public var health:Int;
   private var stunTimer:GameTimer;
-  private var invincibleTimer:GameTimer;
   private var deathTimer:GameTimer;
 
   private var castDurationTimer:GameTimer;
@@ -208,11 +206,14 @@ class Player extends ActiveEntity
     super.update();
   }
 
-  private function takeDamage(enemy:Entity)
+  override private function takeDamage(enemy:Entity)
   {
     health -= 1;
     stunTimer.reset();
     invincibleTimer.reset();
+    if(enemy.name == "nymph") {
+      HUD.hud.echo("NYMPH MOANS APOLOGETICALLY");
+    }
     if(health == 0) {
       deathTimer.reset();
     }
