@@ -6,6 +6,7 @@ import com.haxepunk.utils.*;
 import com.haxepunk.*;
 import com.haxepunk.graphics.*;
 import entities.*;
+import scenes.*;
 
 class Player extends ActiveEntity
 {
@@ -25,6 +26,7 @@ class Player extends ActiveEntity
   public static inline var INVINCIBLE_TIME = 60;
   public static inline var STARTING_HEALTH = 3;
   public static inline var DEATH_TIME = 25000;
+  public static inline var GAME_OVER_SCREEN_DELAY = 250;
 
   private var rollTimer:GameTimer;
   private var rollCooldownTimer:GameTimer;
@@ -34,6 +36,7 @@ class Player extends ActiveEntity
 
   private var stunTimer:GameTimer;
   private var deathTimer:GameTimer;
+  private var gameOverScreenTimer:GameTimer;
 
   private var castDurationTimer:GameTimer;
   private var castCooldownTimer:GameTimer;
@@ -41,6 +44,8 @@ class Player extends ActiveEntity
   private var prevCamera:Point;
 
   public var hasSpellbook:Bool;
+
+  private var isGameOver:Bool;
 
 	public function new(x:Int, y:Int)
 	{
@@ -72,11 +77,14 @@ class Player extends ActiveEntity
     deathTimer = new GameTimer(DEATH_TIME);
     castCooldownTimer = new GameTimer(CAST_COOLDOWN);
     castDurationTimer = new GameTimer(CAST_DURATION);
+    gameOverScreenTimer = new GameTimer(GAME_OVER_SCREEN_DELAY);
+    stunTimer.reset();
     hasSpellbook = false;
     health = STARTING_HEALTH;
     name = "player";
     type = "player";
     layer = -9999;
+    isGameOver = false;
 
 		finishInitializing();
 	}
@@ -88,6 +96,18 @@ class Player extends ActiveEntity
 
   public override function update()
   {
+
+    if(gameOverScreenTimer.wasActive()) {
+      HUD.hud.showGameOver();
+      isGameOver = true;
+    }
+
+    if(isGameOver) {
+      if(Input.check(Key.Z) || Input.check(Key.X)) {
+        HXP.engine.scene = new GameScene();
+      }
+      return;
+    }
 
     if(fallTimer.wasActive()) {
       restartAtRoomEntrance();
@@ -219,6 +239,7 @@ class Player extends ActiveEntity
     }
     if(health == 0) {
       deathTimer.reset();
+      gameOverScreenTimer.reset();
     }
     if(Math.abs(centerX - enemy.centerX) > Math.abs(centerY - enemy.centerY))
     {
@@ -280,6 +301,7 @@ class Player extends ActiveEntity
     health -= 1;
     if(health == 0) {
       deathTimer.reset();
+      gameOverScreenTimer.reset();
     }
     if(!deathTimer.isActive()) {
       x = lastEntrance.x;

@@ -21,6 +21,7 @@ class HUD extends Entity
     private var prevMessage:String;
 
     private var messageTimer:GameTimer;
+    private var gameOverScreen:Image;
 
     public function new()
     {
@@ -55,11 +56,20 @@ class HUD extends Entity
       currentMessage = "";
       messageTimer = new GameTimer(MESSAGE_DURATION);
 
+      gameOverScreen = new Image("graphics/gameover.png");
+      gameOverScreen.x = -10;
+      gameOverScreen.y = -10;
+      gameOverScreen.visible = false;
+
       hud = this;
 
-      allGraphics = new Graphiclist([sprite, textDropshadow, text]);
+      allGraphics = new Graphiclist([sprite, textDropshadow, text, gameOverScreen]);
       graphic = allGraphics;
       layer = -999999;
+    }
+
+    public function showGameOver() {
+      gameOverScreen.visible = true;
     }
 
     public function echo(message:String)
