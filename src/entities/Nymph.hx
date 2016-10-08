@@ -15,6 +15,7 @@ class Nymph extends ActiveEntity
 
   private var facing:String;
   private var isFalling:Bool;
+  private var hasFallen:Bool;
   private var player:Player;
 
 	public function new(x:Int, y:Int)
@@ -31,6 +32,7 @@ class Nymph extends ActiveEntity
     setHitbox(11, 15, -3, -1);
 
     isFalling = false;
+    hasFallen = false;
 
     type = "enemy";
     name = "nymph";
@@ -43,6 +45,11 @@ class Nymph extends ActiveEntity
   {
     if(player == null) {
         player = cast(HXP.scene.getInstance("player"), Player);
+    }
+
+    if(player.isDead()) {
+      sprite.stop();
+      return;
     }
 
     if(!getScreenCoordinates().equals(player.getScreenCoordinates()))
@@ -85,6 +92,9 @@ class Nymph extends ActiveEntity
       velocity.y = 0;
       x = pit.x;
       y = pit.y;
+      if(!isFalling) {
+        HUD.hud.echo("NYMPH LETS OUT A MUFFLED CRY");
+      }
       isFalling = true;
       type = "falling_soul";
     }
@@ -109,6 +119,10 @@ class Nymph extends ActiveEntity
   {
     if(isFalling) {
       sprite.play("fall");
+      if(sprite.complete && !hasFallen) {
+        hasFallen = true;
+        HUD.hud.echo("YOU HEAR A DULL THUD");
+      }
     }
     else {
       if(velocity.x != 0 || velocity.y != 0) {

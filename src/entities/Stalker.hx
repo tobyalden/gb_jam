@@ -15,6 +15,7 @@ class Stalker extends ActiveEntity
 
   private var facing:String;
   private var player:Player;
+  private var isActive:Bool;
 
 	public function new(x:Int, y:Int)
 	{
@@ -29,6 +30,7 @@ class Stalker extends ActiveEntity
     setHitbox(11, 15, -3, -1);
 
     health = STARTING_HEALTH;
+    isActive = false;
 
     type = "enemy";
     layer = -9999;
@@ -43,7 +45,11 @@ class Stalker extends ActiveEntity
         player = cast(HXP.scene.getInstance("player"), Player);
     }
 
-    if(player.isDead()) {
+    if(getScreenCoordinates().equals(player.getScreenCoordinates())) {
+      isActive = true;
+    }
+
+    if(player.isDead() || !isActive) {
       sprite.stop();
       return;
     }

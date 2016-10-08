@@ -160,7 +160,7 @@ class Player extends ActiveEntity
       else {
         graphic.visible = true;
         var enemy:Entity = collide("enemy", x, y);
-        if(enemy != null) {
+        if(enemy != null && !fallTimer.isActive()) {
           takeDamage(enemy);
         }
       }
