@@ -43,8 +43,8 @@ class Checkpoint extends ActiveEntity
     }
 
     private function save(player:Player) {
-      Data.write("saveX", player.lastEntrance.x);
-      Data.write("saveY", player.lastEntrance.y);
+      Data.write("saveX", x);
+      Data.write("saveY", bottom);
       Data.write("hasSpellbook", player.hasSpellbook);
       Data.save("familySave");
       HUD.hud.echo("YOU HAVE BEEN REMEMBERED");

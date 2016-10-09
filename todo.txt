@@ -5,9 +5,9 @@ X give enemies active radius (WED)
 X add damage / death (WED)
 X add npcs (THURS)
 / add textures (THURS)
-- add some form of attack/defense (FRI)
-- add doors & keys
-/// add enemies
+X add some form of attack/defense (FRI)
+X add doors
+X add enemies
 - add levels(SAT / SUN)
 - add music (SUN)
 - add sfx (SUN)
