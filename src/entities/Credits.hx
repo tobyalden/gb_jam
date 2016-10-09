@@ -19,13 +19,33 @@ class Credits extends Entity
     private var currentMessage:String;
 
     private var messageTimer:GameTimer;
-    private var gameOverScreen:Image;
+    private var gameOverScreen:Spritemap;
 
     private var messageIndex:Int;
 
     private var playerEndingText:Array<String> = [
       "HERE'S THE ENDIN TEXT1",
       "HERE'S THE ENDIN TEXT2",
+      "HERE'S THE ENDIN TEXT3",
+      "HERE'S THE ENDIN TEXT4",
+      "HERE'S THE ENDIN TEXT5",
+      "HERE'S THE ENDIN TEXT6",
+      "HERE'S THE ENDIN TEXT7",
+      "HERE'S THE ENDIN TEXT8",
+      "HERE'S THE ENDIN TEXT9",
+      "HERE'S THE ENDIN TXT10",
+      "HERE'S THE ENDIN TXT11",
+      "HERE'S THE ENDIN TXT12",
+      "HERE'S THE ENDIN TXT13",
+      "HERE'S THE ENDIN TXT14",
+      "HERE'S THE ENDIN TXT15",
+      "HERE'S THE ENDIN TXT16",
+      "HERE'S THE ENDIN TXT17 ",
+    ];
+
+    private var nymphEndingText:Array<String> = [
+      "NERE'S THE ENDIN TEXT1",
+      "NKRE'S THE ENDIN TEXT2",
       "HERE'S THE ENDIN TEXT3",
       "HERE'S THE ENDIN TEXT4",
       "HERE'S THE ENDIN TEXT5",
@@ -59,8 +79,9 @@ class Credits extends Entity
       messageTimer = new GameTimer(MESSAGE_INTERVAL);
       messageTimer.reset();
 
-      gameOverScreen = new Image("graphics/" + scenes.Ending.endingType + "_ending.png");
-      gameOverScreen.visible = true;
+      gameOverScreen = new Spritemap("graphics/" + scenes.Ending.endingType + "_ending.png", 160, 144);
+      gameOverScreen.add("default", [0, 1, 2, 3], 0.5, false);
+      gameOverScreen.play("default");
 
       allGraphics = new Graphiclist([gameOverScreen, text]);
       graphic = allGraphics;
@@ -85,10 +106,18 @@ class Credits extends Entity
         System.exit(0);
       }
 
+      if(!gameOverScreen.complete) {
+        messageTimer.reset();
+      }
       if(!messageTimer.isActive()) {
         messageTimer.reset();
         if(messageIndex < playerEndingText.length) {
-          echo(playerEndingText[messageIndex]);
+          if(scenes.Ending.endingType == "player") {
+            echo(playerEndingText[messageIndex]);
+          }
+          else {
+            echo(nymphEndingText[messageIndex]);
+          }
           messageIndex += 1;
         }
       }

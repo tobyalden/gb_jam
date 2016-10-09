@@ -26,6 +26,9 @@ class Crown extends Entity
       if(collideWith(player, x, y) != null) {
         HXP.engine.scene = new scenes.Ending("player");
       }
+      if(collideWith(nymph, x, y) != null) {
+        HXP.engine.scene = new scenes.Ending("nymph");
+      }
       super.update();
     }
 }
