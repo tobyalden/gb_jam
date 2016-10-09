@@ -20,7 +20,11 @@ class Nymph extends ActiveEntity
 
 	public function new(x:Int, y:Int)
 	{
-		super(x, y);
+    Data.load('familySave');
+    var saveX:Int = Data.read('friendX', x);
+    var saveY:Int = Data.read('friendY', y);
+    trace("saveX is " + saveX);
+		super(saveX, saveY);
     sprite = new Spritemap("graphics/nymph.png", 16, 16);
     sprite.add("down", [0, 1], 6);
     sprite.add("right", [2, 3], 6);

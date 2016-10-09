@@ -174,6 +174,7 @@ class Player extends ActiveEntity
         x = pit.x;
         y = pit.y - 10;
         fallTimer.reset();
+        HUD.hud.echo("YOU PLUNGE INTO THE DARKNESS!");
       }
     }
 

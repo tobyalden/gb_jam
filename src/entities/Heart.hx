@@ -7,7 +7,7 @@ class Heart extends Entity
 {
     public function new(x:Int, y:Int)
     {
-      super(x, y);
+      super(x + 3, y + 3);
       graphic = new Image("graphics/heart.png");
       setHitbox(9, 9);
     }
@@ -19,6 +19,7 @@ class Heart extends Entity
       {
         var player = cast(_player, Player);
         player.health += 1;
+        HUD.hud.echo("YOU FEEL A LITTLE BETTER");
         HXP.scene.remove(this);
       }
       super.update();

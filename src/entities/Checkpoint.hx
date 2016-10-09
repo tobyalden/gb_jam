@@ -7,6 +7,7 @@ import com.haxepunk.utils.*;
 class Checkpoint extends ActiveEntity
 {
     private var player:Player;
+    private var nymph:Nymph;
     private var hasSaved:Bool;
 
     public function new(x:Int, y:Int)
@@ -31,6 +32,9 @@ class Checkpoint extends ActiveEntity
       if(player == null) {
           player = cast(HXP.scene.getInstance("player"), Player);
       }
+      if(nymph == null) {
+          nymph = cast(HXP.scene.getInstance("nymph"), Nymph);
+      }
       if(player.getScreenCoordinates().equals(getScreenCoordinates())) {
         if(!hasSaved) {
           save(player);
@@ -46,8 +50,16 @@ class Checkpoint extends ActiveEntity
       Data.write("saveX", x);
       Data.write("saveY", bottom);
       Data.write("hasSpellbook", player.hasSpellbook);
+      if(nymph.getScreenCoordinates().equals(getScreenCoordinates())) {
+        HUD.hud.echo("YOU AND NYMPH ARE REMEMBERED");
+        Data.write("friendX", x);
+        trace("friendX is " + x);
+        Data.write("friendY", top-16);
+      }
+      else {
+        HUD.hud.echo("YOU HAVE BEEN REMEMBERED");
+      }
       Data.save("familySave");
-      HUD.hud.echo("YOU HAVE BEEN REMEMBERED");
       hasSaved = true;
     }
 }
