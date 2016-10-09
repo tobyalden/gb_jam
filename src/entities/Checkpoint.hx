@@ -53,7 +53,6 @@ class Checkpoint extends ActiveEntity
       if(nymph.getScreenCoordinates().equals(getScreenCoordinates())) {
         HUD.hud.echo("YOU AND NYMPH ARE REMEMBERED");
         Data.write("friendX", x);
-        trace("friendX is " + x);
         Data.write("friendY", top-16);
       }
       else {

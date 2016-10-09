@@ -18,6 +18,7 @@ class Level extends TmxEntity
   public static inline var DOOR = 25;
   public static inline var CHECKPOINT = 26;
   public static inline var FLAVOR_TEXT = 27;
+  public static inline var CROWN = 28;
 
   public var entities:Array<Entity>;
 
@@ -36,45 +37,49 @@ class Level extends TmxEntity
           entities.push(new Shadow(entity.x, entity.y - 16));
           entities.push(new HUD());
         }
-        if(entity.gid == PIT)
+        else if(entity.gid == PIT)
         {
           entities.push(new Pit(entity.x, entity.y - 16));
         }
-        if(entity.gid == NYMPH)
+        else if(entity.gid == NYMPH)
         {
           entities.push(new Nymph(entity.x, entity.y - 16));
         }
-        if(entity.gid == STALKER)
+        else if(entity.gid == STALKER)
         {
           entities.push(new Stalker(entity.x, entity.y - 16));
         }
-        if(entity.gid == SEER)
+        else if(entity.gid == SEER)
         {
           entities.push(new Seer(entity.x, entity.y - 16));
         }
-        if(entity.gid == HEART)
+        else if(entity.gid == HEART)
         {
           entities.push(new Heart(entity.x, entity.y - 16));
         }
-        if(entity.gid == ANGEL)
+        else if(entity.gid == ANGEL)
         {
           entities.push(new Angel(entity.x, entity.y - 16));
         }
-        if(entity.gid == SPELLBOOK)
+        else if(entity.gid == SPELLBOOK)
         {
           entities.push(new Spellbook(entity.x, entity.y - 16));
         }
-        if(entity.gid == DOOR)
+        else if(entity.gid == DOOR)
         {
           entities.push(new Door(entity.x, entity.y - 16));
         }
-        if(entity.gid == CHECKPOINT)
+        else if(entity.gid == CHECKPOINT)
         {
           entities.push(new Checkpoint(entity.x, entity.y - 16));
         }
-        if(entity.gid == FLAVOR_TEXT)
+        else if(entity.gid == FLAVOR_TEXT)
         {
           entities.push(new FlavorText(entity.x, entity.y - 16, entity.name));
+        }
+        else if(entity.gid == CROWN)
+        {
+          entities.push(new Crown(entity.x, entity.y - 16));
         }
       }
   }
