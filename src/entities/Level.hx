@@ -17,6 +17,7 @@ class Level extends TmxEntity
   public static inline var SPELLBOOK = 24;
   public static inline var DOOR = 25;
   public static inline var CHECKPOINT = 26;
+  public static inline var FLAVOR_TEXT = 27;
 
   public var entities:Array<Entity>;
 
@@ -70,6 +71,10 @@ class Level extends TmxEntity
         if(entity.gid == CHECKPOINT)
         {
           entities.push(new Checkpoint(entity.x, entity.y - 16));
+        }
+        if(entity.gid == FLAVOR_TEXT)
+        {
+          entities.push(new FlavorText(entity.x, entity.y - 16, entity.name));
         }
       }
   }
