@@ -27,6 +27,10 @@ class TitleScreen extends Entity
         System.exit(0);
       }
 
+      if(Input.check(Key.P)) {
+        HXP.engine.scene = new scenes.GameScene();
+      }
+
       if(titleScreen.complete || titleScreen.currentAnim == "hold") {
         titleScreen.play("hold");
         if(Input.check(Key.Z) || Input.check(Key.X)) {
