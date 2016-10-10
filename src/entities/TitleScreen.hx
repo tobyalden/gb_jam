@@ -9,6 +9,7 @@ class TitleScreen extends Entity
 {
     private var titleScreen:Spritemap;
     private var startSfx:Sfx;
+    private var introMusic:Sfx;
 
     public function new()
     {
@@ -18,6 +19,8 @@ class TitleScreen extends Entity
       titleScreen.add("hold", [4, 3], 5, true);
       titleScreen.play("default");
       startSfx = new Sfx("audio/start.wav");
+      introMusic = new Sfx("audio/intro.wav");
+      introMusic.play();
 
       graphic = titleScreen;
       layer = -999999;

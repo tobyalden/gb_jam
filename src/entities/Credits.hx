@@ -18,6 +18,8 @@ class Credits extends Entity
 
     private var currentMessage:String;
 
+    private var endMusic:Sfx;
+
     private var messageTimer:GameTimer;
     private var gameOverScreen:Spritemap;
 
@@ -72,6 +74,10 @@ class Credits extends Entity
       text.setTextProperty('richText', true);
       text.y = 0;
       text.x = 0;
+
+      scenes.GameScene.caveMusic.stop();
+      endMusic = new Sfx("audio/" + scenes.Ending.endingType + "_ending.wav");
+      endMusic.play();
 
       messageIndex = 0;
 

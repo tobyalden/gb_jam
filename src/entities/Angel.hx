@@ -66,7 +66,7 @@ class Angel extends ActiveEntity
       }
     }
     sprite.play(facing);
-    if(!blessTimer.isActive() && player.getScreenCoordinates().equals(getScreenCoordinates())) {
+    if(!blessTimer.isActive() && !player.isDead() && player.getScreenCoordinates().equals(getScreenCoordinates())) {
       bless();
     }
     super.update();
