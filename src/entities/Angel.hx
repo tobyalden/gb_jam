@@ -18,6 +18,7 @@ class Angel extends ActiveEntity
   private var facing:String;
   private var player:Player;
 
+  private var blessSfx:Sfx;
   private var blessTimer:GameTimer;
 
 	public function new(x:Int, y:Int)
@@ -33,6 +34,7 @@ class Angel extends ActiveEntity
     setHitbox(11, 15, -3, -1);
 
     blessTimer = new GameTimer(BLESS_INTERVAL);
+    blessSfx = new Sfx("audio/cast.wav");
 
     type = "enemy";
     layer = -9999;
@@ -64,7 +66,7 @@ class Angel extends ActiveEntity
       }
     }
     sprite.play(facing);
-    if(!blessTimer.isActive()) {
+    if(!blessTimer.isActive() && player.getScreenCoordinates().equals(getScreenCoordinates())) {
       bless();
     }
     super.update();
@@ -85,6 +87,7 @@ class Angel extends ActiveEntity
   private function bless()
   {
     HXP.scene.add(new Spit(Math.round(centerX), Math.round(centerY), facing));
+    blessSfx.play();
     blessTimer.reset();
   }
 }

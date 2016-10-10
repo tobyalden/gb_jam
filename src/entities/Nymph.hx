@@ -18,6 +18,8 @@ class Nymph extends ActiveEntity
   private var hasFallen:Bool;
   private var player:Player;
 
+  private var fallSfx:Sfx;
+
 	public function new(x:Int, y:Int)
 	{
     Data.load('familySave');
@@ -33,6 +35,8 @@ class Nymph extends ActiveEntity
     sprite.play("down");
     facing = "down";
     setHitbox(11, 15, -3, -1);
+
+    fallSfx = new Sfx("audio/fall.wav");
 
     isFalling = false;
     hasFallen = false;
@@ -97,6 +101,7 @@ class Nymph extends ActiveEntity
       y = pit.y;
       if(!isFalling) {
         HUD.hud.echo("NYMPH LETS OUT A MUFFLED CRY");
+        fallSfx.play();
       }
       isFalling = true;
       type = "falling_soul";

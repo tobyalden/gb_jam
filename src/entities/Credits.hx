@@ -24,7 +24,6 @@ class Credits extends Entity
     private var messageIndex:Int;
 
     private var playerEndingText:Array<String> = [
-      "PRESS Z OR X",
       "YOU TOUCH THE CROWN",
       "THE AIR GROWS QUIET",
       "YOU HEAR A WHISPER",

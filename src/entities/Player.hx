@@ -48,6 +48,12 @@ class Player extends ActiveEntity
 
   private var isGameOver:Bool;
 
+  public var castSfx:Sfx;
+  public var deathSfx:Sfx;
+  public var fallSfx:Sfx;
+  public var flipSfx:Sfx;
+  public var hitSfx:Sfx;
+
 	public function new(x:Int, y:Int)
 	{
     Data.load('familySave');
@@ -90,6 +96,12 @@ class Player extends ActiveEntity
     type = "player";
     layer = -9999;
     isGameOver = false;
+
+    castSfx = new Sfx("audio/cast.wav");
+    deathSfx = new Sfx("audio/death.wav");
+    fallSfx = new Sfx("audio/fall.wav");
+    flipSfx = new Sfx("audio/flip.wav");
+    hitSfx = new Sfx("audio/hit.wav");
 
 		finishInitializing();
 	}
@@ -151,6 +163,7 @@ class Player extends ActiveEntity
       if(Input.check(Key.Z)) {
         if(!rollCooldownTimer.isActive()) {
           rollTimer.reset();
+          flipSfx.play();
           var singleDirectionMultipler:Float = 1;
           if(velocity.x == 0 || velocity.y == 0) {
             singleDirectionMultipler = 1.37;
@@ -175,7 +188,10 @@ class Player extends ActiveEntity
         x = pit.x;
         y = pit.y - 10;
         fallTimer.reset();
-        HUD.hud.echo("YOU PLUNGE INTO THE DARKNESS!");
+        if(!isDead()) {
+          HUD.hud.echo("YOU PLUNGE INTO THE DARKNESS!");
+          fallSfx.play();
+        }
       }
     }
 
@@ -238,12 +254,14 @@ class Player extends ActiveEntity
   override private function takeDamage(enemy:Entity)
   {
     health -= 1;
+    hitSfx.play();
     stunTimer.reset();
     invincibleTimer.reset();
     if(enemy.name == "nymph") {
       HUD.hud.echo("NYMPH MOANS APOLOGETICALLY");
     }
     if(health == 0) {
+      deathSfx.play();
       deathTimer.reset();
       gameOverScreenTimer.reset();
     }
@@ -306,6 +324,7 @@ class Player extends ActiveEntity
   {
     health -= 1;
     if(health == 0) {
+      deathSfx.play();
       deathTimer.reset();
       gameOverScreenTimer.reset();
     }
@@ -325,6 +344,7 @@ class Player extends ActiveEntity
     HXP.scene.add(new Spell(Math.round(centerX), Math.round(centerY), facing));
     castCooldownTimer.reset();
     castDurationTimer.reset();
+    castSfx.play();
   }
 
   public function isShadowVisible()

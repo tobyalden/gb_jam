@@ -3,7 +3,8 @@ package entities;
 
 import flash.geom.Point;
 import com.haxepunk.Entity;
-import com.haxepunk.HXP;
+import com.haxepunk.*;
+import com.haxepunk.utils.*;
 import com.haxepunk.graphics.Spritemap;
 
 class ActiveEntity extends Entity
@@ -17,6 +18,9 @@ class ActiveEntity extends Entity
     private var playerRef:Player;
     private var emoteTimer:GameTimer;
 
+    private var _hitSfx:Sfx;
+    private var _deathSfx:Sfx;
+
     public var health:Int;
     private var invincibleTimer:GameTimer;
 
@@ -27,6 +31,8 @@ class ActiveEntity extends Entity
         velocity = new Point(0, 0);
         emoteTimer = new GameTimer(TIME_BETWEEN_EMOTES);
         invincibleTimer = new GameTimer(DEFAULT_INVINCIBLE_TIME);
+        _hitSfx = new Sfx("audio/hit.wav");
+        _deathSfx = new Sfx("audio/enemy_death.wav");
     }
 
     public function getScreenCoordinates() {
@@ -69,8 +75,12 @@ class ActiveEntity extends Entity
       health -= 1;
       invincibleTimer.reset();
       if(health <= 0) {
+        _deathSfx.play();
         HXP.scene.add(new Explosion(Math.round(x), Math.round(y)));
         HXP.scene.remove(this);
+      }
+      else {
+        _hitSfx.play();
       }
     }
 

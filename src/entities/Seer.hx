@@ -23,6 +23,8 @@ class Seer extends ActiveEntity
     "SEER GLOWERS AT YOU"
   ];
 
+  private var spitSfx:Sfx;
+
   private var facing:String;
   private var player:Player;
 
@@ -48,6 +50,8 @@ class Seer extends ActiveEntity
     sprite.play("down");
     facing = "down";
     setHitbox(11, 15, -3, -1);
+
+    spitSfx = new Sfx("audio/cast.wav");
 
     type = "enemy";
     layer = -9999;
@@ -180,6 +184,7 @@ class Seer extends ActiveEntity
       HUD.hud.echo("SEER HOCKS A LOOGIE! RUDE!!");
     }
     emoteTimer.count += Math.round(emoteTimer.duration/3.5);
+    spitSfx.play();
   }
 
   override public function moveCollideX(e:Entity)

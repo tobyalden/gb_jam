@@ -64,8 +64,12 @@ class Door extends ActiveEntity
       }
       invincibleTimer.reset();
       if(health <= 0) {
+        _deathSfx.play();
         HXP.scene.add(new Explosion(Math.round(x), Math.round(y)));
         HXP.scene.remove(this);
+      }
+      else {
+        _hitSfx.play();
       }
     }
 
