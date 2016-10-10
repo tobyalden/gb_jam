@@ -1,6 +1,7 @@
 package entities;
 
 import flash.geom.Point;
+import flash.filesystem.*;
 import flash.system.System;
 import com.haxepunk.utils.*;
 import com.haxepunk.*;
