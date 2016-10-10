@@ -11,7 +11,7 @@ class GameScene extends Scene
 	public function new()
 	{
 		super();
-		caveMusic = new Sfx("audio/cave.wav");
+		caveMusic = new Sfx("audio/cave.ogg");
 		caveMusic.loop();
 	}
 

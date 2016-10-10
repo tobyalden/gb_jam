@@ -76,7 +76,7 @@ class Credits extends Entity
       text.x = 0;
 
       scenes.GameScene.caveMusic.stop();
-      endMusic = new Sfx("audio/" + scenes.Ending.endingType + "_ending.wav");
+      endMusic = new Sfx("audio/" + scenes.Ending.endingType + "_ending.ogg");
       endMusic.play();
 
       messageIndex = 0;
@@ -108,7 +108,7 @@ class Credits extends Entity
 
     override public function update()
     {
-      if(Input.check(Key.ESCAPE)) {
+      if(Input.check(Key.ESCAPE) || !endMusic.playing) {
         System.exit(0);
       }
 

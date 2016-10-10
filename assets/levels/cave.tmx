@@ -503,9 +503,8 @@
   <object id="902" gid="22" x="272" y="832" width="16" height="16"/>
   <object id="903" gid="22" x="240" y="800" width="16" height="16"/>
   <object id="907" gid="26" x="928" y="800" width="16" height="16"/>
-  <object id="909" gid="28" x="72" y="80" width="16" height="16"/>
+  <object id="909" gid="28" x="72" y="64" width="16" height="16"/>
   <object id="911" name="WELCOME TO CAVE EXPLOR!" gid="27" x="544" y="784" width="16" height="16"/>
-  <object id="914" gid="28" x="368" y="656" width="16" height="16"/>
  </objectgroup>
  <layer name="guide" width="70" height="63" opacity="0.38">
   <data encoding="csv">
