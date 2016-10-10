@@ -262,6 +262,7 @@ class Player extends ActiveEntity
     }
     if(health == 0) {
       deathSfx.play();
+      GameScene.caveMusic.stop();
       deathTimer.reset();
       gameOverScreenTimer.reset();
     }
@@ -325,6 +326,7 @@ class Player extends ActiveEntity
     health -= 1;
     if(health == 0) {
       deathSfx.play();
+      GameScene.caveMusic.stop();
       deathTimer.reset();
       gameOverScreenTimer.reset();
     }

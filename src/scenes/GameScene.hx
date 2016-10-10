@@ -6,9 +6,13 @@ import entities.*;
 class GameScene extends Scene
 {
 
+	public static var caveMusic:Sfx;
+
 	public function new()
 	{
 		super();
+		caveMusic = new Sfx("audio/cave.wav");
+		caveMusic.loop();
 	}
 
 	public override function begin()
@@ -18,6 +22,7 @@ class GameScene extends Scene
 		for (entity in level.entities) {
 			add(entity);
 		}
+		caveMusic.loop();
 	}
 
 	public override function update()

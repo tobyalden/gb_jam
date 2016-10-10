@@ -2,6 +2,7 @@ package entities;
 
 import com.haxepunk.*;
 import com.haxepunk.graphics.*;
+import scenes.*;
 
 class Crown extends Entity
 {
@@ -27,10 +28,12 @@ class Crown extends Entity
       }
       if(collideWith(player, x, y) != null) {
         crownSfx.play();
+        GameScene.caveMusic.stop();
         HXP.engine.scene = new scenes.Ending("player");
       }
       if(collideWith(nymph, x, y) != null) {
         crownSfx.play();
+        GameScene.caveMusic.stop();
         HXP.engine.scene = new scenes.Ending("nymph");
       }
       super.update();
