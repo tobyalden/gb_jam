@@ -1,0 +1,18 @@
+X add roll
+X add scrolling
+X add pits
+X give enemies active radius (WED)
+X add damage / death (WED)
+X add npcs (THURS)
+/ add textures (THURS)
+X add some form of attack/defense (FRI)
+X add doors
+X add enemies
+- add levels(SAT / SUN)
+- add music (SUN)
+- add sfx (SUN)
+- add beginning / ending (SUN)
+
+- : not done
+/ : in progress
+X: finished
