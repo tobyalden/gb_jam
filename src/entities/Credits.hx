@@ -76,7 +76,7 @@ class Credits extends Entity
       text.x = 0;
 
       scenes.GameScene.caveMusic.stop();
-      endMusic = new Sfx("audio/" + scenes.Ending.endingType + "_ending.ogg");
+      endMusic = new Sfx("audio/" + scenes.Ending.endingType + "_ending.mp3");
       endMusic.play();
 
       messageIndex = 0;

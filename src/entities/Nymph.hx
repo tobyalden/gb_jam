@@ -36,7 +36,7 @@ class Nymph extends ActiveEntity
     facing = "down";
     setHitbox(11, 15, -3, -1);
 
-    fallSfx = new Sfx("audio/fall.wav");
+    fallSfx = new Sfx("audio/fall.mp3");
 
     isFalling = false;
     hasFallen = false;

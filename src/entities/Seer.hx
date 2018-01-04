@@ -51,7 +51,7 @@ class Seer extends ActiveEntity
     facing = "down";
     setHitbox(11, 15, -3, -1);
 
-    spitSfx = new Sfx("audio/cast.wav");
+    spitSfx = new Sfx("audio/cast.mp3");
 
     type = "enemy";
     layer = -9999;

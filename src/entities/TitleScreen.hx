@@ -18,8 +18,8 @@ class TitleScreen extends Entity
       titleScreen.add("default", [0, 1, 2, 3], 0.6, false);
       titleScreen.add("hold", [4, 3], 5, true);
       titleScreen.play("default");
-      startSfx = new Sfx("audio/start.wav");
-      introMusic = new Sfx("audio/intro.wav");
+      startSfx = new Sfx("audio/start.mp3");
+      introMusic = new Sfx("audio/intro.mp3");
       introMusic.play();
 
       graphic = titleScreen;

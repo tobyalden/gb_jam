@@ -34,7 +34,7 @@ class Angel extends ActiveEntity
     setHitbox(11, 15, -3, -1);
 
     blessTimer = new GameTimer(BLESS_INTERVAL);
-    blessSfx = new Sfx("audio/cast.wav");
+    blessSfx = new Sfx("audio/cast.mp3");
 
     type = "enemy";
     layer = -9999;

@@ -12,7 +12,7 @@ class Heart extends Entity
       super(x + 3, y + 3);
       graphic = new Image("graphics/heart.png");
       setHitbox(9, 9);
-      heartSfx = new Sfx("audio/heart.wav");
+      heartSfx = new Sfx("audio/heart.mp3");
     }
 
     override public function update()

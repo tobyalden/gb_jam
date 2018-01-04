@@ -14,7 +14,7 @@ class Crown extends Entity
     {
       super(x, y);
       graphic = new Image("graphics/crown.png");
-      crownSfx = new Sfx("audio/pickup_crown.wav");
+      crownSfx = new Sfx("audio/pickup_crown.mp3");
       setHitbox(16, 16);
     }
 

@@ -16,7 +16,7 @@ class Spellbook extends Entity
       deleteSelf = Data.read('hasSpellbook', false);
       super(x, y);
       graphic = new Image("graphics/spellbook.png");
-      spellbookSfx = new Sfx("audio/spellbook.wav");
+      spellbookSfx = new Sfx("audio/spellbook.mp3");
       setHitbox(16, 16);
     }
 

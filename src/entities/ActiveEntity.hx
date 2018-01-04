@@ -31,8 +31,8 @@ class ActiveEntity extends Entity
         velocity = new Point(0, 0);
         emoteTimer = new GameTimer(TIME_BETWEEN_EMOTES);
         invincibleTimer = new GameTimer(DEFAULT_INVINCIBLE_TIME);
-        _hitSfx = new Sfx("audio/hit.wav");
-        _deathSfx = new Sfx("audio/enemy_death.wav");
+        _hitSfx = new Sfx("audio/hit.mp3");
+        _deathSfx = new Sfx("audio/enemy_death.mp3");
     }
 
     public function getScreenCoordinates() {

@@ -97,11 +97,11 @@ class Player extends ActiveEntity
     layer = -9999;
     isGameOver = false;
 
-    castSfx = new Sfx("audio/cast.wav");
-    deathSfx = new Sfx("audio/death.wav");
-    fallSfx = new Sfx("audio/fall.wav");
-    flipSfx = new Sfx("audio/flip.wav");
-    hitSfx = new Sfx("audio/hit.wav");
+    castSfx = new Sfx("audio/cast.mp3");
+    deathSfx = new Sfx("audio/death.mp3");
+    fallSfx = new Sfx("audio/fall.mp3");
+    flipSfx = new Sfx("audio/flip.mp3");
+    hitSfx = new Sfx("audio/hit.mp3");
 
 		finishInitializing();
 	}
