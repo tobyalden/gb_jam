@@ -222,8 +222,8 @@ class Player extends ActiveEntity
     animate();
 
 
-    HXP.scene.camera.x = Math.floor(centerX / HXP.screen.width) * HXP.screen.width;
-    HXP.scene.camera.y = Math.floor(centerY / HXP.screen.height) * HXP.screen.height;
+    HXP.scene.camera.x = Math.floor(centerX / 160) * 160;
+    HXP.scene.camera.y = Math.floor(centerY / 144) * 144;
 
     if(!prevCamera.equals(new Point(HXP.scene.camera.x, HXP.scene.camera.y))) {
       HUD.hud.clearMessages();
