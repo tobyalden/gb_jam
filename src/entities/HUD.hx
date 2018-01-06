@@ -17,6 +17,8 @@ class HUD extends Entity
     private var textDropshadow2:Text;
     private var textDropshadow3:Text;
     private var textDropshadow4:Text;
+    private var textDropshadow5:Text;
+    private var textDropshadow6:Text;
     private var allGraphics:Graphiclist;
     private var player:Player;
 
@@ -78,6 +80,20 @@ class HUD extends Entity
       textDropshadow4.setTextProperty('richText', true);
       textDropshadow4.y = 110;
       textDropshadow4.x = text.x + 1;
+
+      textDropshadow5 = new Text();
+      textDropshadow5.smooth = false;
+      textDropshadow5.addStyle("default", {color: 0xDAEFD7, size: 8, bold: true});
+      textDropshadow5.setTextProperty('richText', true);
+      textDropshadow5.y = 110 + 1;
+      textDropshadow5.x = text.x + 1;
+
+      textDropshadow6 = new Text();
+      textDropshadow6.smooth = false;
+      textDropshadow6.addStyle("default", {color: 0xDAEFD7, size: 8, bold: true});
+      textDropshadow6.setTextProperty('richText', true);
+      textDropshadow6.y = 110 - 1;
+      textDropshadow6.x = text.x - 1;
 
       prevMessage = "";
       currentMessage = "";
