@@ -6,11 +6,14 @@ import com.haxepunk.graphics.*;
 class Heart extends Entity
 {
     private var heartSfx:Sfx;
+    private var sprite:Image;
 
     public function new(x:Int, y:Int)
     {
       super(x + 3, y + 3);
-      graphic = new Image("graphics/heart.png");
+      sprite = new Image("graphics/heart.png");
+      sprite.smooth = false;
+      graphic = sprite;
       setHitbox(9, 9);
       heartSfx = new Sfx("audio/heart.mp3");
     }

@@ -120,8 +120,8 @@ class HUD extends Entity
           player = cast(HXP.scene.getInstance("player"), Player);
       }
       if(player.health >= 0 && player.health <= 10) {
-        x = Math.floor(player.centerX / HXP.screen.width) * HXP.screen.width + X_POSITION;
-        y = Math.floor(player.centerY / HXP.screen.height) * HXP.screen.height + Y_POSITION;
+        x = Math.floor(player.centerX / 160) * 160 + X_POSITION;
+        y = Math.floor(player.centerY / 144) * 144 + Y_POSITION;
         sprite.play(Std.string(player.health));
       }
 

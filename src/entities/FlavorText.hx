@@ -37,8 +37,8 @@ class FlavorText extends Entity
 
     public function getScreenCoordinates() {
       return new Point(
-        Math.floor(centerX / HXP.screen.width),
-        Math.floor(centerY / HXP.screen.height)
+        Math.floor(centerX / 160),
+        Math.floor(centerY / 144)
       );
     }
 

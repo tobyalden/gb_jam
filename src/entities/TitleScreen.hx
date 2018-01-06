@@ -21,6 +21,7 @@ class TitleScreen extends Entity
       startSfx = new Sfx("audio/start.mp3");
       introMusic = new Sfx("audio/intro.mp3");
       introMusic.play();
+      titleScreen.smooth = false;
 
       graphic = titleScreen;
       layer = -999999;
