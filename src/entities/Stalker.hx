@@ -33,6 +33,7 @@ class Stalker extends ActiveEntity
     isActive = false;
 
     type = "enemy";
+    name = 'stalker';
     layer = -9999;
 
 		finishInitializing();

@@ -65,6 +65,26 @@ class Credits extends Entity
       "               THE END"
     ];
 
+    private var stalkerEndingText:Array<String> = [
+      "THE AIR GROWS COLD",
+      "AND THE ROOM DARKENS",
+      "",
+      "",
+      "ALL YOU ARE IS MINE",
+      "AND EVERYTHING THAT",
+      "IS NOT MINE IS GONE",
+      "",
+      "",
+      "A HUNDRED HANDS",
+      "PRESS OUTWARD",
+      "INSIDE YOU",
+      "",
+      "ONLY YOUR SCREAMS",
+      "ARE YOUR OWN",
+      "",
+      "               THE END"
+    ];
+
     public function new()
     {
       super(0, 0);
@@ -86,6 +106,7 @@ class Credits extends Entity
       messageTimer.reset();
 
       gameOverScreen = new Spritemap("graphics/" + scenes.Ending.endingType + "_ending.png", 160, 144);
+      gameOverScreen.smooth = false;
       gameOverScreen.add("default", [0, 1, 2, 3], 0.5, false);
       gameOverScreen.play("default");
 
@@ -120,6 +141,9 @@ class Credits extends Entity
         if(messageIndex < playerEndingText.length) {
           if(scenes.Ending.endingType == "player") {
             echo(playerEndingText[messageIndex]);
+          }
+          else if(scenes.Ending.endingType == "stalker") {
+            echo(stalkerEndingText[messageIndex]);
           }
           else {
             echo(nymphEndingText[messageIndex]);

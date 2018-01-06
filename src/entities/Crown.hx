@@ -9,11 +9,14 @@ class Crown extends Entity
     var player:Player;
     var nymph:Nymph;
     var crownSfx:Sfx;
+    var sprite:Image;
 
     public function new(x:Int, y:Int)
     {
       super(x, y);
-      graphic = new Image("graphics/crown.png");
+      sprite = new Image("graphics/crown.png");
+      sprite.smooth = false;
+      graphic = sprite;
       crownSfx = new Sfx("audio/pickup_crown.mp3");
       setHitbox(16, 16);
     }
@@ -31,11 +34,20 @@ class Crown extends Entity
         GameScene.caveMusic.stop();
         HXP.engine.scene = new scenes.Ending("player");
       }
-      if(collideWith(nymph, x, y) != null) {
+      else if(collideWith(nymph, x, y) != null) {
         crownSfx.play();
         GameScene.caveMusic.stop();
         HXP.engine.scene = new scenes.Ending("nymph");
       }
+      else if(collide('enemy', x, y) != null) {  // if its not a nymph its a stalker
+        var enemy = collide('enemy', x, y);
+        if(enemy.name == 'stalker') {
+            crownSfx.play();
+            GameScene.caveMusic.stop();
+            HXP.engine.scene = new scenes.Ending("stalker");
+        }
+      }
+
       super.update();
     }
 }
