@@ -108,7 +108,7 @@ class HUD extends Entity
 
       hud = this;
 
-      allGraphics = new Graphiclist([sprite, textDropshadow, textDropshadow2, textDropshadow3, textDropshadow4, text, gameOverScreen]);
+      allGraphics = new Graphiclist([sprite, textDropshadow, textDropshadow2, textDropshadow3, textDropshadow4, textDropshadow5, textDropshadow6, text, gameOverScreen]);
       graphic = allGraphics;
       layer = -999999;
     }
