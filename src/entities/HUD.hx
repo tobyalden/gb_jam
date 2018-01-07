@@ -48,49 +48,50 @@ class HUD extends Entity
 
       text = new Text();
       text.smooth = false;
-      text.addStyle("default", {color: 0x072103, size: 8, bold: false});
+      //text.addStyle("default", {color: 0x072103, size: 8, bold: false});
+      text.addStyle("default", {color: 0xDAEFD7, size: 8, bold: false});
       text.setTextProperty('richText', true);
       text.y = 110;
       text.x = -5;
 
       textDropshadow = new Text();
       textDropshadow.smooth = false;
-      textDropshadow.addStyle("default", {color: 0xDAEFD7, size: 8, bold: true});
+      textDropshadow.addStyle("default", {color: 0x072103, size: 8, bold: true});
       textDropshadow.setTextProperty('richText', true);
       textDropshadow.y = 110 + 1;
       textDropshadow.x = text.x;
 
       textDropshadow2 = new Text();
       textDropshadow2.smooth = false;
-      textDropshadow2.addStyle("default", {color: 0xDAEFD7, size: 8, bold: true});
+      textDropshadow2.addStyle("default", {color: 0x072103, size: 8, bold: true});
       textDropshadow2.setTextProperty('richText', true);
       textDropshadow2.y = 110 - 1;
       textDropshadow2.x = text.x;
 
       textDropshadow3 = new Text();
       textDropshadow3.smooth = false;
-      textDropshadow3.addStyle("default", {color: 0xDAEFD7, size: 8, bold: true});
+      textDropshadow3.addStyle("default", {color: 0x072103, size: 8, bold: true});
       textDropshadow3.setTextProperty('richText', true);
       textDropshadow3.y = 110;
       textDropshadow3.x = text.x - 1;
 
       textDropshadow4 = new Text();
       textDropshadow4.smooth = false;
-      textDropshadow4.addStyle("default", {color: 0xDAEFD7, size: 8, bold: true});
+      textDropshadow4.addStyle("default", {color: 0x072103, size: 8, bold: true});
       textDropshadow4.setTextProperty('richText', true);
       textDropshadow4.y = 110;
       textDropshadow4.x = text.x + 1;
 
       textDropshadow5 = new Text();
       textDropshadow5.smooth = false;
-      textDropshadow5.addStyle("default", {color: 0xDAEFD7, size: 8, bold: true});
+      textDropshadow5.addStyle("default", {color: 0x072103, size: 8, bold: true});
       textDropshadow5.setTextProperty('richText', true);
       textDropshadow5.y = 110 + 1;
       textDropshadow5.x = text.x + 1;
 
       textDropshadow6 = new Text();
       textDropshadow6.smooth = false;
-      textDropshadow6.addStyle("default", {color: 0xDAEFD7, size: 8, bold: true});
+      textDropshadow6.addStyle("default", {color: 0x072103, size: 8, bold: true});
       textDropshadow6.setTextProperty('richText', true);
       textDropshadow6.y = 110 - 1;
       textDropshadow6.x = text.x - 1;
